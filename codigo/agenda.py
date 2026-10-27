@@ -149,19 +149,22 @@ class agenda():
             self.opcao =int(input(': '))
             if self.opcao == 1:
                 self.mes += 1
+                if self.mes > 12:
+                   self.mes =1
+                   self.ano +=1
 
             elif self.opcao == 2:
                 self.mes -= 1                                
-     
-            if self.mes > 12:
-                self.mes =1
-                self.ano +=1
+                if self.mes > 12:
+                    self.mes =1
+                    self.ano +=1
             elif self.opcao == 3:
                 self.marcar_compromisso()
             elif self.opcao == 4:
                 self.excluir_compromisso()
             elif self.opcao == 5:
                 self.mostrar()
+                input('\nPressione ENTER para continuar...')
             else:
                 print("❌ Opção inválida! Tente novamente.")
 
