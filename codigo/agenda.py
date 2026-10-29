@@ -90,20 +90,20 @@ class agenda():
         for numero, compromisso in enumerate(self.compromissos, start=1):
             print(f"[{numero}] {compromisso['nome']}")
             print()
-            self.sorn = str(input('Você deseja excluir alguma dessas tarefas [S/N]  '))
+        self.sorn = str(input('Você deseja excluir alguma dessas tarefas [S/N]  '))
+        print()
+        if self.sorn.lower() == 's':
             print()
-            if self.sorn.lower() == 's':
+            self.opcao = int(input('Qual tarefa você deseja excluir? '))
+            print()
+            compromisso = self.compromissos[self.opcao -1]
+            self.compromissos.pop(self.opcao - 1)
+            with open(self.ARQUIVO,'w',encoding='utf-8') as arquivos:
+                json.dump(self.compromissos,arquivos,indent=4,ensure_ascii=False)
                 print()
-                self.opcao = int(input('Qual tarefa você deseja excluir? '))
+                print(f'Tarefa {compromisso["nome"]} excluído com sucesso!')
                 print()
-                compromisso = self.compromissos[self.opcao -1]
-                self.compromissos.pop(self.opcao - 1)
-                with open(self.ARQUIVO,'w',encoding='utf-8') as arquivos:
-                    json.dump(self.compromissos,arquivos,indent=4,ensure_ascii=4)
-                    print()
-                    print(f'Tarefa {compromisso["nome"]} excluído com sucesso!')
-                    print()
-                    input('\nPressione ENTER para continuar...')
+                input('\nPressione ENTER para continuar...')
     def mostrar(self):
         with open(self.ARQUIVO, 'r', encoding='utf-8') as arquivo:
             self.compromissos = json.load(arquivo)
